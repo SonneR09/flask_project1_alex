@@ -1,10 +1,15 @@
 # -*- coding: utf8 -*-
 # Без первой строчки у меня не запускался скрипт
+import random
 import flask
 
 
-departures = {"msk": "Из Москвы", "spb": "Из Петербурга", "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
+departureS = {"msk": "Из Москвы", "spb": "Из Петербурга", "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
               "kazan": "Из Казани"}
+
+shuffled_figures = [i for i in range(1, 17)]
+random.shuffle(shuffled_figures)  # Для вывода случайных туров
+
 tourS = {
     1: {
         "title": "Marina Lake Hotel & Spa",
@@ -190,7 +195,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def main():
-    return flask.render_template('index.html', tours=tourS)
+    return flask.render_template('index.html', tours=tourS, shuffled_figure=shuffled_figures[1:7])
 
 
 @app.route('/departures/<departure>/')
@@ -198,9 +203,9 @@ def departures():
     return flask.render_template('departure.html')
 
 
-@app.route('/tours/<id>/')
-def tours(id1):
-    return flask.render_template('tour.html', tours=tourS, id=id1)
+@app.route('/tours/<int:id>/')
+def tours(id):
+    return flask.render_template('tour.html', tours=tourS, id=id, departures=departureS)
 
 
 if __name__ == '__main__':
