@@ -1,6 +1,11 @@
+# -*- coding: utf8 -*-
+# Без первой строчки у меня не запускался скрипт
 import flask
 
-tours = {
+
+departures = {"msk": "Из Москвы", "spb": "Из Петербурга", "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
+              "kazan": "Из Казани"}
+tourS = {
     1: {
         "title": "Marina Lake Hotel & Spa",
         "description": "Отель выглядит уютно. Он был построен из красного соснового дерева и украшен синими камнями.  Высокие округлые окна добавляют общий стиль дома и были добавлены в дом в довольно симметричном образце.",
@@ -185,7 +190,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def main():
-    return flask.render_template('index.html', tours=tours)
+    return flask.render_template('index.html', tours=tourS)
 
 
 @app.route('/departures/<departure>/')
@@ -194,9 +199,9 @@ def departures():
 
 
 @app.route('/tours/<id>/')
-def tours():
-    return flask.render_template('tour.html')
+def tours(id1):
+    return flask.render_template('tour.html', tours=tourS, id=id1)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
