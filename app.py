@@ -240,8 +240,11 @@ def main():
 
 @app.route('/departures/<dep>/')
 def departures(dep):
-    # TODO: write filter by <dep>
-    return flask.render_template('departure.html', tours=tourS, list_of_departures=departure1, dep=dep)
+    suit_list = dict()
+    for number in tourS:
+        if tourS[number]['departure'] == dep:
+            suit_list[number] = tourS[number]
+    return flask.render_template('departure.html', tours=suit_list, list_of_departures=departure1, dep=dep)
 
 
 @app.route('/tours/<int:id>/')

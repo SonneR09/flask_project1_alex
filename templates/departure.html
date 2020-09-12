@@ -4,7 +4,11 @@
 
 <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим {{list_of_departures[dep]}}</h1>
-    <p class="mb-4">Найдено 15 туров, от 26 000 до 84 600 и от 4 ночей до 15 ночей</p>
+    <p class="mb-4">Найдено {{tours|length}} тура, от
+        {%set min_dict = tours.values()|min(attribute='price')%}{{min_dict.price}} до
+        {%set max_dict = tours.values()|max(attribute='price')%} {{max_dict.price}} и от
+        {%set min_dict_n = tours.values()|min(attribute='nights')%} {{min_dict_n.nights}} ночей до
+        {%set max_dict_n = tours.values()|max(attribute='nights')%} {{max_dict_n.nights}} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
       {% for tour in tours %}
