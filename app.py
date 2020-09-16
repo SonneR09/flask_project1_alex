@@ -252,4 +252,5 @@ def tours(id):
     return flask.render_template('tour.html', tours=tourS, id=id, departures=departure1)
 
 
-app.run()
+if __name__ == '__main__':
+    app.run()
