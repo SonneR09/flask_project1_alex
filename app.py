@@ -252,18 +252,4 @@ def tours(id):
     return flask.render_template('tour.html', tours=tourS, id=id, departures=departure1)
 
 
-@app.route("/login/")
-def render_login():
-    form = """
-      <form action="/auth/" method="post">     
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <input type="submit">
-      </form>
-    """
-
-    return form
-
-
 app.run()
-
